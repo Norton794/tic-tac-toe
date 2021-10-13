@@ -1,0 +1,11 @@
+body {
+  background: #f2f2f2;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  margin-top: 20vh;
+}
