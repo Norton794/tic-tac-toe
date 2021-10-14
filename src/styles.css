@@ -9,3 +9,13 @@ body {
   place-items: center;
   margin-top: 20vh;
 }
+
+button {
+  font-weight: bold;
+  color: #fff;
+  margin-top: 10px;
+  padding: 8px;
+  background: #099ac2;
+  border-radius: 4px;
+  border: none;
+}

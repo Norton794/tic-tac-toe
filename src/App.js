@@ -62,6 +62,33 @@ const Board = ({ className }) => {
     }
   }
 
+
+
+  function calculateWinner(squares) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        return squares[a];
+      }
+    }
+    return null;
+  }
+
+  function restartGame() {
+    setData(Array(9).fill(null));
+    setCheckX(true);
+  }
+
   return (
     <>
       <p style={{ fontWeight: "bold", color: "20232a" }}>{status}</p>
@@ -80,6 +107,8 @@ const Board = ({ className }) => {
         <div>{renderSquare(7)}</div>
         <div>{renderSquare(8)}</div>
       </div>
+
+      <button onClick={restartGame}>Restart Game</button>
     </>
   );
 };
@@ -88,22 +117,4 @@ const StyledBoard = styled(Board)`
   display: flex;
 `;
 
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
-}
+
