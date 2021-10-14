@@ -50,11 +50,16 @@ const Board = ({ className }) => {
   }
 
   const winner = calculateWinner(data);
+  let qtd = data.filter((d) => Boolean(d));
   let status;
   if (winner) {
     status = "Winner: " + winner;
   } else {
-    status = "Next player: " + (checkX ? "X" : "O");
+    if (qtd.length === 9) {
+      status = "Draw";
+    } else {
+      status = "Next player: " + (checkX ? "X" : "O");
+    }
   }
 
   return (
