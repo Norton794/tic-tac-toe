@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
-const Square = ({ className, value, onClick }) => {
+export const Square = ({ className, value, onClick }) => {
   return (
-    <button className={className} onClick={onClick}>
-      {value}
-    </button>
+    <button className={className} onClick={onClick} value={value}></button>
   );
 };
 
