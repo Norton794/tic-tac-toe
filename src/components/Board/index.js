@@ -1,36 +1,7 @@
-import React, { useState } from "react";
 import styled from "styled-components";
-import "./styles.css";
-
-export default function App() {
-  return (
-    <div className="App">
-      <StyledBoard />
-    </div>
-  );
-}
-
-const Square = ({ className, value, onClick }) => {
-  return (
-    <button className={className} onClick={onClick}>
-      {value}
-    </button>
-  );
-};
-
-const StyledSquare = styled(Square)`
-  background: #20232a;
-  border: 1px solid #fff;
-  color: #fff;
-  height: 50px;
-  width: 50px;
-  cursor: pointer;
-  font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif;
-  border-radius: 10px;
-  font-weight: bold;
-`;
-
+import React, { useState } from "react";
+import { StyledSquare } from "../Square/index";
+import { calculateWinner } from "../../constants/index";
 const Board = ({ className }) => {
   const [data, setData] = useState(Array(9).fill(null));
   const [checkX, setCheckX] = useState(true);
@@ -51,7 +22,8 @@ const Board = ({ className }) => {
 
   const winner = calculateWinner(data);
   let qtd = data.filter((d) => Boolean(d));
-  let status;
+  let status = "";
+  //let restart = false;
   if (winner) {
     status = "Winner: " + winner;
   } else {
@@ -62,28 +34,6 @@ const Board = ({ className }) => {
     }
   }
 
-
-
-  function calculateWinner(squares) {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6]
-    ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
-      }
-    }
-    return null;
-  }
-
   function restartGame() {
     setData(Array(9).fill(null));
     setCheckX(true);
@@ -92,6 +42,7 @@ const Board = ({ className }) => {
   return (
     <>
       <p style={{ fontWeight: "bold", color: "20232a" }}>{status}</p>
+
       <div className={className}>
         <div>{renderSquare(0)}</div>
         <div>{renderSquare(1)}</div>
@@ -113,8 +64,6 @@ const Board = ({ className }) => {
   );
 };
 
-const StyledBoard = styled(Board)`
+export const StyledBoard = styled(Board)`
   display: flex;
 `;
-
-
